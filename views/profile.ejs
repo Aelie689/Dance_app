@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .profile h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .profile p {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .upload-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .upload-form textarea,
+        .upload-form input[type="file"] {
+            margin-bottom: 10px;
+            width: 80%;
+        }
+
+        .upload-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .posts {
+            margin-top: 30px;
+        }
+
+        .post {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .post img,
+        .post video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .post p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, <%= user.name %>!</h1>
+    <div class="profile">
+        <!-- รูปภาพโปรไฟล์ -->
+        <img src="<%= user.profile_image || '/default-profile.png' %>" alt="Profile Image">
+        <h2><%= user.name %></h2>
+        <p>Email: <%= user.email %></p>
+        <p>Joined Date: <%= user.joined_date.toLocaleString() %></p>
+    </div>
+
+    <!-- ฟอร์มโพสต์ -->
+    <div class="upload-form">
+        <h3>Post a Dance Clip or Picture</h3>
+        <form action="/profile/posts" method="POST" enctype="multipart/form-data">
+            <textarea name="caption" placeholder="Write a caption..." rows="3" required></textarea><br>
+            <input type="file" name="content" accept="image/*,video/*" required><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <!-- โพสต์ทั้งหมด -->
+    <div class="posts">
+        <h3>Your Posts</h3>
+        <% if (posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="post">
+                    <% if (post.content_type === 'image') { %>
+                        <img src="<%= post.content_url %>" alt="Post Image">
+                    <% } else if (post.content_type === 'video') { %>
+                        <video controls>
+                            <source src="<%= post.content_url %>" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    <% } %>
+                    <p><strong>Caption:</strong> <%= post.caption %></p>
+                    <p><small>Posted on: <%= new Date(post.created_at).toLocaleString() %></small></p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No posts yet. Share your first dance clip or picture!</p>
+        <% } %>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/home">Go to Home Page</a>
+    </div>
+</body>
+</html>

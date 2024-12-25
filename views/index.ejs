@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+
+        .text-container {
+            max-width: 400px;
+        }
+
+        .text-container h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+
+        .text-container p {
+            color: #555;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .buttons button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="/welcome.jpg" alt="Welcome Image">
+        </div>
+
+        <!-- Text Section -->
+        <div class="text-container">
+            <h1>Welcome to the Dance App!</h1>
+            <p>Find your favorite dance groups and events here.</p>
+            <div class="buttons">
+                <a href="/home">
+                    <button>Go to Home Page</button>
+                </a>
+                <a href="/profile">
+                    <button>View Profile</button>
+                </a>
+                <a href="/feed">
+                    <button>View Feed</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

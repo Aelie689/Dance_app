@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .post {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .post img, .post video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .post h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .post p {
+            color: #555;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feed</h1>
+    <div class="search-bar">
+        <form action="/feed/search" method="GET">
+            <input type="text" name="query" placeholder="Search users by name or email..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <% posts.forEach(post => { %>
+        <div class="post">
+            <h3><%= post.user_name %></h3>
+            <% if (post.content_type === 'image') { %>
+                <img src="<%= post.content_url %>" alt="Post Image">
+            <% } else if (post.content_type === 'video') { %>
+                <video controls>
+                    <source src="<%= post.content_url %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            <% } %>
+            <p><strong>Caption:</strong> <%= post.caption %></p>
+            <p><small>Posted on: <%= post.created_at %></small></p>
+        </div>
+    <% }); %>
+</body>
+</html>

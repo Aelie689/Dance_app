@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Share</title>
+</head>
+<body>
+    <h1>Share Activities</h1>
+
+    <!-- Search Bar -->
+    <form action="/share" method="get">
+        <input type="text" name="search" placeholder="Search groups or people" value="<%= search || '' %>">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Display Groups -->
+    <ul>
+        <% if (groups && groups.length > 0) { %>
+            <% groups.forEach(group => { %>
+                <li>
+                    <strong><%= group.name %></strong> - <%= group.genre %>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <p>No results found.</p>
+        <% } %>
+    </ul>
+
+    <!-- Form to Share New Activity -->
+    <h2>Share a New Activity</h2>
+    <form action="/share" method="post">
+        <input type="text" name="name" placeholder="Group Name" required>
+        <input type="text" name="genre" placeholder="Genre" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="date" name="event_date" required>
+        <button type="submit">Share</button>
+    </form>
+</body>
+</html>

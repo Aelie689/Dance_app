@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Groups Today</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .group h2 {
+            margin: 0;
+            color: #333;
+        }
+        .group p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .group video {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .join-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .join-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dance Groups Today</h1>
+    <% groups.forEach(group => { %>
+        <div class="group">
+            <h2><%= group.name %> - <%= group.genre %></h2>
+            <p><strong>Created By:</strong> <%= group.created_by %></p>
+            <% if (group.has_choreography && group.choreography_clip) { %>
+                <video controls>
+                    <source src="<%= group.choreography_clip %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            <% } %>
+            <p><strong>Song:</strong> <%= group.song %></p>
+            <p><strong>Location:</strong> <%= group.location %></p>
+            <p><strong>Time:</strong> <%= group.event_time %></p>
+            <p><strong>Description:</strong> <%= group.description %></p>
+            <a href="#" class="join-btn">Join Group</a>
+        </div>
+    <% }); %>
+</body>
+</html>
